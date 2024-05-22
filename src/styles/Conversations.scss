@@ -1,0 +1,352 @@
+@import './colors';
+
+.Conversations {
+    width: 25%;
+    background: $dark-bg-gray;
+    padding: 10px 20px;
+    border: 1px solid $light-bg-gray;
+
+
+
+    header {
+        width: 100%;
+        height: 50px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h1 {
+            font-size: 23px;
+            font-weight: 500;
+            font-family: "Inter", sans-serif;
+        }
+
+        .icon-container {
+            width: 30px;
+            height: 30px;
+
+            img {
+                width: 18px;
+                height: 18px;
+            }
+
+            &:hover {
+                cursor: pointer;
+                opacity: 0.7;
+            }
+
+            &:active {
+                opacity: 0.5;
+                transition: all 0.3s;
+            }
+        }
+    }
+
+    main {
+        margin-top: 5px;
+        width: 100%;
+
+        .active {
+            background: $light-bg-gray !important;
+        }
+
+        .chat {
+            height: 50px;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 5px;
+
+            display: flex;
+            justify-content: space-between;
+
+            .left {
+                display: flex;
+                align-items: center;
+
+                .prifile-img-container {
+                    border-radius: 100%;
+
+                    img {
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 100%;
+                    }
+                }
+
+                .info-container {
+                    margin-left: 10px;
+                    display: flex;
+                    flex-direction: column;
+
+                    div {
+                        &:first-child {
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-between;
+                        }
+                    }
+
+                    .last-message {
+                        display: flex;
+                        align-items: center;
+                        margin-top: 3px;
+
+                        img {
+                            width: 15px;
+                            height: 15px;
+                            margin-right: 5px;
+                        }
+                    }
+
+
+                    span {
+                        &:first-child {
+                            font-family: "Inter", sans-serif;
+                            font-weight: 600;
+                            font-size: 14px;
+                            color: white !important;
+                        }
+
+                        &:last-child {
+                            font-family: "Inter", sans-serif;
+                            font-size: 12px;
+                            color: $text-gray;
+                        }
+                    }
+
+                }
+
+            }
+
+
+            .right-side-container {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+
+                span {
+                    font-family: "Inter", sans-serif;
+                    font-size: 12px;
+                    font-weight: 500;
+
+                    &:first-child {
+                        padding-top: 8px;
+                    }
+                }
+
+                .unread-text {
+                    color: $dark-bg-gray;
+                    background: transparent !important;
+                }
+
+            }
+
+            &:hover {
+                cursor: pointer;
+                background: $light-bg-gray;
+            }
+
+            &:active {
+                opacity: 0.5;
+                transition: all 0.3s;
+            }
+        }
+    }
+
+}
+
+.Chat {
+    width: 75%;
+    height: 100vh;
+    background-image: url("../assets/chat-bg.png");
+    background-size: contain;
+    background-position: center;
+
+    .wrapper {
+        // height: calc(100% - 40px);
+
+        .header {
+            width: 100%;
+            height: 60px;
+            padding: 0 20px;
+            background: $light-bg-gray;
+            border-bottom: 0.1px solid rgb(83, 83, 83);
+
+            // margin-bottom: 10px;
+            // box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+
+            display: flex;
+            align-items: center;
+
+            img {
+                width: 35px;
+                height: 35px;
+                border-radius: 100%;
+            }
+
+            .info {
+                margin-left: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                span {
+                    font-family: "Inter", sans-serif;
+
+                    &:last-child {
+                        font-size: 12px;
+                        color: #27A356;
+                    }
+                }
+
+            }
+
+        }
+
+        .footer {
+            width: calc(75% - 80px);
+            height: 50px;
+            position: absolute;
+            bottom: 0;
+            background: $dark-bg-gray;
+            border-top: 0.1px solid rgb(83, 83, 83);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .input-box {
+                width: 95%;
+                height: 30px;
+                background: #3E3E3F;
+                border-radius: 25px;
+                padding: 0 15px;
+
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                input {
+                    width: 90%;
+                    height: 100%;
+                    background: transparent;
+                    border: none;
+                    outline: none;
+                    color: white;
+                    font-family: "Inter", sans-serif;
+
+                    &::placeholder {
+                        font-size: 14px;
+                    }
+                }
+
+                img {
+                    width: 18px;
+                    height: 18px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                    &:active {
+                        opacity: 0.5;
+                    }
+                }
+            }
+
+        }
+
+        .messages {
+            height: calc(100vh - 145px);
+            padding: 10px 20px;
+            padding-top: 10px;
+            overflow-y: scroll;
+            scrollbar-color: gray $dark-bg-gray;
+
+            .Message {
+                margin-top: 5px;
+
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+
+                span {
+                    padding: 8px 15px;
+                    background: #464646;
+                    font-family: "Inter", sans-serif;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
+
+
+.ant-popover-inner {
+    background: $dark-bg-gray !important;
+    border: 0.1px solid rgb(83, 83, 83);
+}
+
+
+.popover-content {
+    width: 250px;
+    padding: 10px 10px;
+    background: $light-bg-gray;
+    color: white;
+    border-radius: 5px;
+
+    .search {
+        height: 40px;
+        background: $active-bg-gray;
+        border: 0.1px solid rgb(83, 83, 83);
+        display: flex;
+        align-items: center;
+
+        input {
+            width: 100%;
+            height: 30px;
+            padding-left: 10px;
+            background: transparent;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            color: white;
+            font-family: "Inter", sans-serif;
+        }
+    }
+
+    .user {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        // background: #000;
+        padding-left: 10px;
+        border-radius: 10px;
+        margin-top: 10px;
+
+        &:hover {
+            cursor: pointer;
+            border: 0.1px solid rgb(83, 83, 83);
+            background: $active-bg-gray;
+        }
+
+        &:active {
+            opacity: 0.5;
+        }
+
+        img {
+            width: 30px !important;
+            height: 30px !important;
+            border-radius: 100%;
+        }
+
+        span {
+            margin-left: 5px;
+        }
+
+    }
+
+}

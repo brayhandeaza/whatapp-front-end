@@ -1,0 +1,16 @@
+@import './colors';
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background: $dark-bg-gray;
+  overflow: hidden;
+
+  color: white;
+}
+
+.App {
+
+  display: flex;
+}

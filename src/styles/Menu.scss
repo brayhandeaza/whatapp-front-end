@@ -1,0 +1,93 @@
+@import './colors';
+
+
+.Menu {
+    width: 40px;
+    height: calc(100vh - 20px);
+    background: $light-bg-gray;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .active {
+        background: $active-bg-gray;
+    }
+
+
+    .logo {
+        margin-bottom: 50px;
+
+        img {
+            width: 40px;
+            height: 40px;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:active {
+            opacity: 0.5;
+            transition: all 0.3s;
+        }
+    }
+
+    nav {
+        .icon-container {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 20px;
+                height: 20px;
+            }
+
+            &:hover {
+                cursor: pointer;
+                background: $active-bg-hover-gray;
+            }
+
+            &:active {
+                opacity: 0.5;
+                transition: all 0.3s;
+            }
+        }
+    }
+
+    footer {
+        .icon-container {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 20px;
+                height: 20px;
+            }
+
+            &:hover {
+                cursor: pointer;
+                background: $active-bg-hover-gray;
+            }
+
+            &:active {
+                opacity: 0.5;
+                transition: all 0.3s;
+            }
+        }
+    }
+}
