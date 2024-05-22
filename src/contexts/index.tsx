@@ -1,32 +1,13 @@
-import { USER_INFO } from "@/constants";
+import { USER_INFO, sortByMessageCreatedAt } from "@/constants";
 import axios from "axios";
 import moment from "moment";
 import { createContext, useContext, useEffect, useState } from "react";
 import { SocketContext } from "./socket";
 import { updateLastSeen } from "@/api";
+import { MainContextType } from "@/types";
 
 
-type Props = {
-    children?: any
-    fetchMessages: (_: number) => void
-
-    conversations: any[]
-    setConversations: (_: any) => void
-
-    conversation: any
-    setConversation: (_: any) => void
-
-    messages: any[]
-    setMessages: (_: any) => void
-
-    activeIndex: number
-    setActiveIndex: (_: number) => void
-
-    lastSeen: string
-    setLastSeen: (_: string) => void
-}
-
-export const MainContext = createContext<Props>({
+export const MainContext = createContext<MainContextType>({
     conversations: [],
     setConversations: (_: any) => { },
 
@@ -48,7 +29,6 @@ export const MainContext = createContext<Props>({
 export const MainProvider = ({ children }: any) => {
     const { emitEvent, onEvent } = useContext(SocketContext)
     const [lastSeen, setLastSeen] = useState<string>("")
-
     const [conversations, setConversations] = useState([])
     const [messages, setMessages] = useState([])
     const [conversation, setConversation] = useState(undefined)
@@ -57,13 +37,14 @@ export const MainProvider = ({ children }: any) => {
 
     const fetchUserConversations = async () => {
         await axios.get(`/users/${USER_INFO.id}?lastSeen=${moment().format("YYYY-MM-DD")}`).then(res => {
-            setConversations(res.data.data.conversations)
+            const sortedConversations = sortByMessageCreatedAt(res.data.data.conversations)
+            console.log(sortedConversations, activeIndex, "sortedConversations");
 
-            setConversation(res.data.data.conversations[0])
-            setActiveIndex(res.data.data.conversations[0]?.id)
+            setConversations(sortedConversations)
+            setConversation(sortedConversations[0])
+            setActiveIndex(sortedConversations[0]?.id)
         })
     }
-
 
     const fetchMessages = async (id: number) => {
         await axios.get(`/messages/conversation/${id}/?page=1&pageSize=50`).then((res) => {
@@ -76,6 +57,7 @@ export const MainProvider = ({ children }: any) => {
             })
         })
     }
+
 
     useEffect(() => {
         fetchUserConversations()
@@ -101,7 +83,11 @@ export const MainProvider = ({ children }: any) => {
             } else {
 
             }
-            // setMessages([...messages, message])
+        })
+
+
+        onEvent("new-message", (_data: any) => {
+            fetchUserConversations()
         })
 
     }, [])

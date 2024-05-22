@@ -15,3 +15,24 @@ export type ConversationType = {
     messages: any
     participants: any
 }
+
+
+export type MainContextType = {
+    children?: any
+    fetchMessages: (_: number) => void
+
+    conversations: any[]
+    setConversations: (_: any) => void
+
+    conversation: any
+    setConversation: (_: any) => void
+
+    messages: any[]
+    setMessages: (_: any) => void
+
+    activeIndex: number
+    setActiveIndex: (_: number) => void
+
+    lastSeen: string
+    setLastSeen: (_: string) => void
+}

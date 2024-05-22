@@ -30,19 +30,7 @@ export const SocketProvider = ({ children }: any) => {
             console.log("connected")
         })
 
-        // socket.on("last-seen", (data) => {
-        //     console.log({ data }, "last-seen");
-
-        //     socket.emit("last-seen-answer", {
-        //         sentTo: data.sentFrom,
-        //         sentFrom: USER_INFO.id,
-        //         lastSeen: "Online"
-        //     })
-        // })
-
         socket.emit("joinRoom", USER_INFO.id)
-
-
     }, [])
 
     const data = {

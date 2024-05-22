@@ -18,7 +18,7 @@ const Chat: React.FC = () => {
     const [hasMounted, setHasMounted] = useState(false)
 
     const { emitEvent, onEvent } = useContext(SocketContext)
-    const { lastSeen, setLastSeen, conversation, activeIndex, setMessages, messages, fetchMessages } = useContext(MainContext)
+    const { lastSeen, setLastSeen, conversation, setMessages, messages, fetchMessages } = useContext(MainContext)
 
 
     const updateLastSeen = async (conversationId: number) => {
