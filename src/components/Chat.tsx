@@ -18,16 +18,17 @@ const Chat: React.FC = () => {
     const [hasMounted, setHasMounted] = useState(false)
 
     const { emitEvent, onEvent } = useContext(SocketContext)
-    const { lastSeen, setLastSeen, conversation, setMessages, messages, fetchMessages } = useContext(MainContext)
-
+    const { lastSeen, fetchUserConversations, setLastSeen, conversation, setMessages, messages, fetchMessages } = useContext(MainContext)
 
     const updateLastSeen = async (conversationId: number) => {
-        await axios.post("/conversations/lastSeen", {
-            conversationId,
-            userId: USER_INFO.id
-        }).then((_res) => {
-            // console.log(res.data.data, "last-seen");
-        })
+        try {
+            await axios.post("/conversations/lastSeen", {
+                conversationId,
+                userId: USER_INFO.id
+            })
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     const sendMessage = async ({ key }: { key: string }) => {
@@ -50,6 +51,7 @@ const Chat: React.FC = () => {
                 setMessage("")
                 setHasMounted(!hasMounted)
                 updateLastSeen(conversation.id)
+                fetchUserConversations()
             })
         }
     }

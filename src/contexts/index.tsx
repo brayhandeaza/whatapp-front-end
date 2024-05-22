@@ -23,7 +23,9 @@ export const MainContext = createContext<MainContextType>({
     fetchMessages: (_conversationId: number) => { },
 
     lastSeen: "",
-    setLastSeen: (_: string) => { }
+    setLastSeen: (_: string) => { },
+
+    fetchUserConversations: () => { }
 })
 
 export const MainProvider = ({ children }: any) => {
@@ -38,7 +40,6 @@ export const MainProvider = ({ children }: any) => {
     const fetchUserConversations = async () => {
         await axios.get(`/users/${USER_INFO.id}?lastSeen=${moment().format("YYYY-MM-DD")}`).then(res => {
             const sortedConversations = sortByMessageCreatedAt(res.data.data.conversations)
-            console.log(sortedConversations, activeIndex, "sortedConversations");
 
             setConversations(sortedConversations)
             setConversation(sortedConversations[0])
@@ -65,8 +66,6 @@ export const MainProvider = ({ children }: any) => {
 
 
         onEvent("last-seen", (data) => {
-            console.log({ data }, "last-seen");
-
             emitEvent("last-seen-answer", {
                 sentTo: data.sentFrom,
                 sentFrom: USER_INFO.id,
@@ -109,7 +108,8 @@ export const MainProvider = ({ children }: any) => {
         lastSeen,
         setLastSeen,
 
-        fetchMessages
+        fetchMessages,
+        fetchUserConversations
     }
 
     return (

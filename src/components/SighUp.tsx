@@ -79,8 +79,8 @@ const SighUp = () => {
 
 
         if (isLogin) {
-            console.log(fullName, email, password);
             setError("")
+            
         } else {
             try {
                 const user = await axios.post("/users", { fullName, email, password })

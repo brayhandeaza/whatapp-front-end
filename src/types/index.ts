@@ -35,4 +35,6 @@ export type MainContextType = {
 
     lastSeen: string
     setLastSeen: (_: string) => void
+
+    fetchUserConversations: () => void
 }

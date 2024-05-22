@@ -29,7 +29,6 @@ const Conversation: React.FC<Props> = ({ conversation, id, onClick }: Props) => 
         const lastMessageDate = conversation.lastSeens[0]?.lastSeen || moment().format("YYYY-MM-DD")
         try {
             await axios.get(`/messages/unread/conversation/${conversation.id}?lastSeenDate=${lastMessageDate}`).then(res => {
-                // console.log(res.data.data);
                 setUnReadMessageCount(res.data.data || 0)
             })
         } catch (error) {
@@ -64,7 +63,7 @@ const Conversation: React.FC<Props> = ({ conversation, id, onClick }: Props) => 
             </div>
 
             <div className="right-side-container">
-                <span style={{ color: unReadMessageCount ? "#27A356" : "white" }} id={`read-message-date-${id}`}>{moment(conversation.messages[0]?.createdAt).fromNow()}</span>
+                <span style={{ color: "white" }} id={`read-message-date-${id}`}>{moment(conversation.messages[0]?.createdAt).fromNow()}</span>
             </div>
         </div>
     )

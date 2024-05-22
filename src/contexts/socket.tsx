@@ -26,10 +26,6 @@ export const SocketProvider = ({ children }: any) => {
     }
 
     useEffect(() => {
-        socket.on("connection", () => {
-            console.log("connected")
-        })
-
         socket.emit("joinRoom", USER_INFO.id)
     }, [])
 
