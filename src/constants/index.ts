@@ -11,3 +11,5 @@ export const sortByMessageCreatedAt = (conversations: any[]) => {
 };
 
 
+export const SERVER_URL = "https://whatsapp-back-end.vercel.app"
+

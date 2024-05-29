@@ -1,4 +1,4 @@
-import { USER_INFO } from "@/constants";
+import { SERVER_URL, USER_INFO } from "@/constants";
 import { SocketType } from "@/types";
 import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
@@ -12,7 +12,7 @@ export const SocketContext = createContext<SocketType>({
 })
 
 export const SocketProvider = ({ children }: any) => {
-    const socket = io("http://localhost:3000")
+    const socket = io(SERVER_URL)
     const [conversationInfo, setConversationInfo] = useState<number>()
 
     const emitEvent = (event: string, data: any) => {
