@@ -48,15 +48,21 @@ export const MainProvider = ({ children }: any) => {
     }
 
     const fetchMessages = async (id: number) => {
-        await axios.get(`/messages/conversation/${id}/?page=1&pageSize=50`).then((res) => {
-            setMessages(res.data.data)
+        if (!id) return
+        
+        try {
+            const messages = await axios.get(`/messages/conversation/${id}/?page=1&pageSize=50`)
 
+            setMessages(messages.data.data)
             emitEvent("last-seen", {
                 sentTo: conversation?.users[0]?.id,
                 sentFrom: USER_INFO.id,
                 lastSeen: "Online"
             })
-        })
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 

@@ -76,17 +76,30 @@ const SighUp = () => {
 
     const onSubmit = async (e: any) => {
         e.preventDefault()
-
+        setError("")
 
         if (isLogin) {
-            setError("")
-            
+            try {
+                const user = await axios.post("/users/login", { email, password })
+
+                if (user.status === 200) {
+                    localStorage.setItem("userInfo", JSON.stringify(user.data.data))
+                    window.location.reload()
+                } 
+
+            } catch (error) {
+                console.error(error.response.data);
+                setError(error.response.data.error)
+            }
+
         } else {
             try {
                 const user = await axios.post("/users", { fullName, email, password })
 
-                localStorage.setItem("userInfo", JSON.stringify(user.data.data))
-                window.location.reload()
+                if (user.status === 200) {
+                    localStorage.setItem("userInfo", JSON.stringify(user.data.data))
+                    window.location.reload()
+                }
 
             } catch (error) {
                 console.error(error.response.data.error);

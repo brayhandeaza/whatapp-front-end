@@ -1,0 +1,13 @@
+version: '3.4'
+services:
+  # frontend
+  frontend:
+    image: whatsapp-frontend
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 5173:5173
+    command: npm run preview

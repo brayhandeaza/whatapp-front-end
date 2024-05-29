@@ -9,7 +9,7 @@ import { USER_INFO } from './constants/index.ts'
 import SighUp from './components/SighUp.tsx'
 
 
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'https://whatsapp-back-end.vercel.app'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	USER_INFO ?

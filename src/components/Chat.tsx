@@ -74,6 +74,8 @@ const Chat: React.FC = () => {
 
 
     useEffect(() => {
+        console.log(conversation, "conversation");
+        
         if (conversation) {
             fetchMessages(conversation.id)
         }
