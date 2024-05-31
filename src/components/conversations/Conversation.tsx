@@ -1,5 +1,7 @@
 import { unReadMessage } from '@/assets'
+import { USER_INFO } from '@/constants'
 import { MainContext } from '@/contexts'
+import { Popover } from 'antd'
 import axios from 'axios'
 import moment from 'moment'
 import React, { useContext, useEffect, useState } from 'react'
@@ -9,12 +11,13 @@ type Props = {
     conversation: any
     id: number
     activeIndex: number
+    showSelection: boolean
     onClick: (conversation: any, _lastSeen: string, unReadMessageCount: number) => void
 }
 
-const Conversation: React.FC<Props> = ({ conversation, id, onClick }: Props) => {
+const Conversation: React.FC<Props> = ({ conversation, id, onClick, showSelection }: Props) => {
     const [unReadMessageCount, setUnReadMessageCount] = useState<number>(0)
-    const { activeIndex } = useContext(MainContext)
+    const { activeIndex, archivedSelected, setArchivedSelected } = useContext(MainContext)
 
 
     const formatLastMessage = (text: string) => {
@@ -36,7 +39,24 @@ const Conversation: React.FC<Props> = ({ conversation, id, onClick }: Props) => 
         }
     }
 
+    const onChange = (e: any) => {
+        if (e.target.checked) {
+            setArchivedSelected([...archivedSelected, conversation.id])
 
+        } else {
+            setArchivedSelected(archivedSelected.filter((id: number) => id !== conversation.id))
+        }
+    }
+
+    const updateArchivedConversations = async () => {
+        try {
+            await axios.patch(`/conversations/${id}`, { "archivedBy": USER_INFO.id })
+            window.location.reload()
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     useEffect(() => {
         fetchUnReadMessageCount()
@@ -44,26 +64,32 @@ const Conversation: React.FC<Props> = ({ conversation, id, onClick }: Props) => 
 
 
     return (
-        <div id={`chat-${id}`} style={{ background: activeIndex === conversation.id ? "#282829" : "" }} onClick={() => onClick(conversation, new Date().toISOString(), unReadMessageCount)} className={`chat`}>
-            <div className="left">
-                <div className={`prifile-img-container`}>
-                    <img src={conversation.users[0].imageUrl} alt="" />
+        <div style={{ display: "flex" }}>
+            {showSelection ? <input style={{ marginRight: "10px" }} onChange={(e) => onChange(e)} type="checkbox" /> : null}
+            <div id={`chat-${id}`} style={{ background: activeIndex === conversation.id ? "#282829" : "" }} onClick={() => onClick(conversation, new Date().toISOString(), unReadMessageCount)} className={`chat`}>
+                <div className="left">
+                    <div className={`prifile-img-container`}>
+                        <img src={conversation.users[0].imageUrl} alt="" />
+                    </div>
+
+                    <div className="info-container">
+                        <div>
+                            <span>{conversation.users[0].fullName}</span>
+                        </div>
+                        <div style={{ opacity: conversation.messages[0] ? 1 : 0 }} className="last-message">
+                            <img id={`read-message-icon-${id}`} src={unReadMessage} alt="readMessage" />
+                            <span id={`last-message-${id}`}>{formatLastMessage(conversation.messages[0]?.body)}</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="info-container">
-                    <div>
-                        <span>{conversation.users[0].fullName}</span>
-                        {/* <span>{moment(conversation.messages[0].createdAt).fromNow()}</span> */}
-                    </div>
-                    <div style={{ opacity: conversation.messages[0] ? 1 : 0 }} className="last-message">
-                        <img id={`read-message-icon-${id}`} src={unReadMessage} alt="readMessage" />
-                        <span id={`last-message-${id}`}>{formatLastMessage(conversation.messages[0]?.body)}</span>
-                    </div>
+                <div className="right-side-container">
+                    <Popover placement="bottom" content={
+                        <span onClick={updateArchivedConversations} className='archived-conversation' style={{ color: "white", padding: "0 20px", cursor: "pointer" }}>Archived</span>
+                    }>
+                        <span style={{ color: "white", cursor: "pointer" }} id={`read-message-date-${id}`}>{moment(conversation.messages[0]?.createdAt).fromNow()}</span>
+                    </Popover>
                 </div>
-            </div>
-
-            <div className="right-side-container">
-                <span style={{ color: "white" }} id={`read-message-date-${id}`}>{moment(conversation.messages[0]?.createdAt).fromNow()}</span>
             </div>
         </div>
     )

@@ -11,6 +11,9 @@ export const MainContext = createContext<MainContextType>({
     conversations: [],
     setConversations: (_: any) => { },
 
+    archivedSelected: [],
+    setArchivedSelected: (_: any) => { },
+
     messages: [],
     setMessages: (_: any) => { },
 
@@ -33,6 +36,7 @@ export const MainProvider = ({ children }: any) => {
     const [lastSeen, setLastSeen] = useState<string>("")
     const [conversations, setConversations] = useState([])
     const [messages, setMessages] = useState([])
+    const [archivedSelected, setArchivedSelected] = useState([])
     const [conversation, setConversation] = useState(undefined)
     const [activeIndex, setActiveIndex] = useState<number>()
 
@@ -49,7 +53,7 @@ export const MainProvider = ({ children }: any) => {
 
     const fetchMessages = async (id: number) => {
         if (!id) return
-        
+
         try {
             const messages = await axios.get(`/messages/conversation/${id}/?page=1&pageSize=50`)
 
@@ -67,9 +71,7 @@ export const MainProvider = ({ children }: any) => {
 
 
     useEffect(() => {
-        fetchUserConversations()
         fetchMessages(conversation?.id)
-
 
         onEvent("last-seen", (data) => {
             emitEvent("last-seen-answer", {
@@ -104,6 +106,9 @@ export const MainProvider = ({ children }: any) => {
 
         messages,
         setMessages,
+
+        archivedSelected,
+        setArchivedSelected,
 
         conversation,
         setConversation,

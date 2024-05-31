@@ -11,5 +11,5 @@ export const sortByMessageCreatedAt = (conversations: any[]) => {
 };
 
 
-export const SERVER_URL = "https://whatsapp-back-end.vercel.app"
+export const SERVER_URL = "https://whatsapp-back-end-28aa98490ce5.herokuapp.com/"
 

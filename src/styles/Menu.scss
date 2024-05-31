@@ -2,6 +2,7 @@
 
 
 .Menu {
+    z-index: 9000;
     width: 40px;
     height: calc(100vh - 20px);
     background: $light-bg-gray;

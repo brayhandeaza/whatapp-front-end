@@ -1,14 +1,35 @@
-import Menu from '@/components/Menu'
-import Conversations from '@/components/conversations'
-import Chat from './components/Chat'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import HomeView from '@/views/HomeView'
+import SettingsView from '@/views/SettingsView'
+import ArchivedView from '@/views/ArchivedView'
+import NotFoundView from '@/views/404View'
 
-function App() {
+
+
+const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <HomeView />
+	},
+	{
+		path: "/archived",
+		element: <ArchivedView />
+	},
+	{
+		path: "/settings",
+		element: <SettingsView />
+	},
+	{
+		path: "*",
+		element: <NotFoundView />
+	}
+])
+
+const App: React.FC = () => {
 
 	return (
 		<div className="App">
-			<Menu />
-			<Conversations />
-			<Chat />
+			<RouterProvider router={router} />
 		</div>
 	)
 }

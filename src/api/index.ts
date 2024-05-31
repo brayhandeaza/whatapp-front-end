@@ -10,4 +10,3 @@ export const updateLastSeen = async (conversationId: number) => {
     })
 }
 
-

@@ -30,6 +30,9 @@ export type MainContextType = {
     messages: any[]
     setMessages: (_: any) => void
 
+    archivedSelected: number[]
+    setArchivedSelected: (_: any) => void
+
     activeIndex: number
     setActiveIndex: (_: number) => void
 
