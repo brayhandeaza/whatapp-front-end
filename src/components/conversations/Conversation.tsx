@@ -5,17 +5,20 @@ import { Popover } from 'antd'
 import axios from 'axios'
 import moment from 'moment'
 import React, { useContext, useEffect, useState } from 'react'
+import { MdExpandCircleDown } from "react-icons/md";
+
 
 
 type Props = {
     conversation: any
+    title: string
     id: number
     activeIndex: number
     showSelection: boolean
     onClick: (conversation: any, _lastSeen: string, unReadMessageCount: number) => void
 }
 
-const Conversation: React.FC<Props> = ({ conversation, id, onClick, showSelection }: Props) => {
+const Conversation: React.FC<Props> = ({ conversation, title, id, onClick, showSelection }: Props) => {
     const [unReadMessageCount, setUnReadMessageCount] = useState<number>(0)
     const { activeIndex, archivedSelected, setArchivedSelected } = useContext(MainContext)
 
@@ -84,11 +87,12 @@ const Conversation: React.FC<Props> = ({ conversation, id, onClick, showSelectio
                 </div>
 
                 <div className="right-side-container">
-                    <Popover placement="bottom" content={
+                    <span style={{ color: "white", cursor: "pointer" }} id={`read-message-date-${id}`}>{moment(conversation.messages[0]?.createdAt).fromNow()}</span>
+                    {title !== "Archived" ? <Popover placement="bottom" content={
                         <span onClick={updateArchivedConversations} className='archived-conversation' style={{ color: "white", padding: "0 20px", cursor: "pointer" }}>Archived</span>
                     }>
-                        <span style={{ color: "white", cursor: "pointer" }} id={`read-message-date-${id}`}>{moment(conversation.messages[0]?.createdAt).fromNow()}</span>
-                    </Popover>
+                        <MdExpandCircleDown size={22} style={{ color: "gray", marginTop: "5px", marginLeft: 5 }} />
+                    </Popover> : null}
                 </div>
             </div>
         </div>

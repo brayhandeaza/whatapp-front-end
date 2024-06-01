@@ -1,0 +1,104 @@
+@import "./colors.scss";
+
+.Settings {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+
+    main {
+        height: 100%;
+        width: calc(100vw - 80px);
+        padding-top: 100px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h3 {
+            background: $light-bg-gray;
+            padding: 5px 15px;
+            border-radius: 10px;
+        }
+
+
+        .image-container {
+            position: relative;
+
+            img {
+                width: 150px;
+                height: 150px;
+                border-radius: 100%;
+
+
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &:active {
+                    opacity: 0.5;
+                    transition: all 0.3s;
+                }
+            }
+
+            .plus-icon {
+                font-size: 30px;
+                color: $main-green;
+                background: white;
+                border-radius: 100px;
+
+                position: absolute;
+                bottom: 0;
+                right: -10px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &:active {
+                    opacity: 0.5;
+                    transition: all 0.3s;
+                }
+            }
+
+        }
+
+
+
+        button {
+            width: 150px;
+            height: 40px;
+            background: $main-green;
+            border: 0.1px solid rgb(83, 83, 83);
+            color: white;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+    }
+
+    dialog {
+        width: 100vw;
+        height: 100vh;
+        background: none;
+        padding-top: 100px;
+
+
+        .image-container {
+            width: 800px;
+            height: 800px;
+            transform: translateX(60%);
+
+            img {
+                width: 800px;
+                height: 800px;
+                border-radius: 20px;
+                // margin-top: 50px;
+                object-fit: contain;
+            }
+
+        }
+
+    }
+}

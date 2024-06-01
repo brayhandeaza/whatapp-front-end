@@ -8,6 +8,8 @@ import { MainContextType } from "@/types";
 
 
 export const MainContext = createContext<MainContextType>({
+
+    
     conversations: [],
     setConversations: (_: any) => { },
 

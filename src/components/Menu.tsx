@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { archived, chat, logo, settings } from "@/assets"
 import "@/styles/Menu.scss"
 import { Link, useLocation } from "react-router-dom"
+import { MainContext } from "@/contexts"
+
 
 const Menu: React.FC = () => {
     const [active, setActive] = useState<string>("chat")
     const location = useLocation()
+    const { setConversations } = useContext(MainContext)
+
 
 
     const handleOnActive = (value: string) => {
-
+        setConversations([])
         setActive(value)
     }
 
@@ -22,9 +26,11 @@ const Menu: React.FC = () => {
     return (
         <div className="Menu">
             <section>
-                <div className="logo">
-                    <img src={logo} alt="logo" />
-                </div>
+                <Link to={"/"}>
+                    <div className="logo">
+                        <img src={logo} alt="logo" />
+                    </div>
+                </Link>
                 <nav>
                     <Link to={"/"}>
                         <div onClick={() => handleOnActive("chat")} className={`icon-container ${active === "/" ? "active" : ""}`}>

@@ -26,7 +26,6 @@ const ArchivedView: React.FC = () => {
 
 	useEffect(() => {
 		fetchArchivedConversations()
-
 	}, [])
 
 

@@ -20,6 +20,7 @@ export type ConversationType = {
 export type MainContextType = {
     children?: any
     fetchMessages: (_: number) => void
+    
 
     conversations: any[]
     setConversations: (_: any) => void

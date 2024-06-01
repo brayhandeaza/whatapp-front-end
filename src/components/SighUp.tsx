@@ -88,8 +88,8 @@ const SighUp = () => {
                 } 
 
             } catch (error) {
-                console.error(error.response.data);
-                setError(error.response.data.error)
+                console.error(error);
+                // setError(error.response.data.error)
             }
 
         } else {

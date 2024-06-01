@@ -67,13 +67,24 @@ const Chat: React.FC = () => {
     };
 
 
+    const RenderProfilePopoverContent = () => {
+        return (
+            <div className="profile-popover">
+                <img src={conversation.users[0]?.imageUrl} alt="profile" />
+                <h3>{conversation.users[0]?.fullName}</h3>
+                <span>{conversation.users[0]?.email}</span>
+            </div>
+        )
+    }
+
+
     useEffect(() => {
         scrollToBottom();
     }, [hasMounted, messages]);
 
 
 
-    useEffect(() => {        
+    useEffect(() => {
         if (conversation) {
             fetchMessages(conversation.id)
         }
@@ -95,9 +106,9 @@ const Chat: React.FC = () => {
             {conversation ?
                 <div className="wrapper">
                     <div className="header">
-                        <div>
+                        <Popover content={RenderProfilePopoverContent} trigger="click">
                             <img src={conversation.users[0]?.imageUrl} alt="profile" />
-                        </div>
+                        </Popover>
                         <div className="info">
                             <span>{conversation.users[0]?.fullName}</span>
                             <span id="user-online-status">{lastSeen}</span>

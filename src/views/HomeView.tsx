@@ -11,22 +11,28 @@ const HomeView: React.FC = () => {
     const { setConversations, setConversation, setActiveIndex } = useContext(MainContext)
 
 
-
     const fetchUserConversations = async () => {
-        await axios.get(`/users/${USER_INFO.id}?lastSeen=${moment().format("YYYY-MM-DD")}`).then(res => {
-            const sortedConversations = sortByMessageCreatedAt(res.data.data.conversations)
+        try {
+            const user = await axios.get(`/users/${USER_INFO.id}?lastSeen=${moment().format("YYYY-MM-DD")}`)
 
-            setConversations(sortedConversations)
-            setConversation(sortedConversations[0])
-            setActiveIndex(sortedConversations[0]?.id)
-        })
+            if (user.data.data) {
+                const sortedConversations = sortByMessageCreatedAt(user.data?.data?.conversations)
+
+                setConversations(sortedConversations)
+                setConversation(sortedConversations[0])
+                setActiveIndex(sortedConversations[0]?.id)
+            }
+
+
+
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 
     useEffect(() => {
         fetchUserConversations()
-
-
     }, [])
 
 

@@ -129,6 +129,7 @@ const Conversations: React.FC<Props> = ({ title = "Chats" }: Props) => {
             <main>
                 {conversations.map((conversation: any, key: number) => (
                     <Conversation
+                        title={title}
                         showSelection={showSelection}
                         key={"chat-" + key}
                         conversation={conversation}
