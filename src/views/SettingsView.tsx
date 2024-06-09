@@ -44,6 +44,8 @@ const SettingsView: React.FC = () => {
             // const url = URL.createObjectURL(ref.current?.files[0])
         
             const { secure_url } = await uploadImage(ref.current?.files[0])
+            console.log(secure_url, "secure_url");
+            
             const user = await axios.patch(`/users/${USER_INFO.id}`, {
                 imageUrl: secure_url
             })
