@@ -110,7 +110,7 @@ const Chat: React.FC = () => {
                             <img src={conversation.users[0]?.imageUrl} alt="profile" />
                         </Popover>
                         <div className="info">
-                            <span>{conversation.users[0]?.fullName}</span>
+                            <span className='full-name'>{conversation.users[0]?.fullName}</span>
                             <span id="user-online-status">{lastSeen}</span>
                         </div>
                     </div>

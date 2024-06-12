@@ -77,7 +77,7 @@ const Conversation: React.FC<Props> = ({ conversation, title, id, onClick, showS
 
                     <div className="info-container">
                         <div>
-                            <span>{conversation.users[0].fullName}</span>
+                            <span className='full-name'>{conversation.users[0].fullName}</span>
                         </div>
                         <div style={{ opacity: conversation.messages[0] ? 1 : 0 }} className="last-message">
                             <img id={`read-message-icon-${id}`} src={unReadMessage} alt="readMessage" />

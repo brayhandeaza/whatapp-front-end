@@ -11,7 +11,10 @@ export const sortByMessageCreatedAt = (conversations: any[]) => {
 };
 
 
-export const SERVER_URL = "https://whatsapp-back-end-28aa98490ce5.herokuapp.com/"
+console.log(USER_INFO, "USER_INFO");
+
+
+export const SERVER_URL = "http://localhost:3000/" || "https://whatsapp-back-end-28aa98490ce5.herokuapp.com/"
 
 
 export const EXPO_PUBLIC_CLOUDINARY_API_URL="https://api.cloudinary.com/v1_1/brayhandeaza/auto/upload"

@@ -73,7 +73,7 @@ const Conversations: React.FC<Props> = ({ title = "Chats" }: Props) => {
                 {users ? users.map((user: any, key: number) => (
                     <div onClick={() => createConversation(user.id)} key={`user-popover-${key}`} className="user">
                         <img src={user?.imageUrl} alt={`user-popover-image`} />
-                        <span>{user?.fullName}</span>
+                        <span style={{ textTransform: "capitalize" }}>{user?.fullName}</span>
                     </div>
                 )) : null}
             </div>

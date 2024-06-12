@@ -77,7 +77,7 @@ const SettingsView: React.FC = () => {
                     <input onChange={handleChangeImage} ref={ref} style={{ display: "none" }} type="file" name="" id="file-input" />
                 </div>
 
-                <h1>{USER_INFO.fullName}</h1>
+                <h1 className="full-name">{USER_INFO.fullName}</h1>
                 <h3>{USER_INFO.email}</h3>
 
                 <button onClick={onLogout}>Logout</button>
