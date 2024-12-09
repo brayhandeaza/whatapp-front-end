@@ -1,7 +1,7 @@
 @import './colors';
 
 .Conversations {
-    width: 25%;
+    width: 450px;
     background: $dark-bg-gray;
     padding: 10px 20px;
     border: 1px solid $light-bg-gray;
@@ -256,7 +256,7 @@
         }
 
         .footer {
-            width: calc(75% - 80px);
+            width: calc(100% - 425px);
             height: 50px;
             position: absolute;
             bottom: 0;
